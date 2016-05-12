@@ -1,32 +1,48 @@
+
+
 Channel: This represents a stream of data between applications
-ChannelÓÃÓÚÔÚ×Ö½Ú»º³åÇøºÍÎ»ÓÚÍ¨µÀÁíÒ»²àµÄÊµÌå£¨Í¨³£ÊÇÒ»¸öÎÄ¼ş»òÌ×½Ó×Ö£©Ö®¼äÓĞĞ§µØ´«ÊäÊı¾İ¡£
+Channelç”¨äºåœ¨å­—èŠ‚ç¼“å†²åŒºå’Œä½äºé€šé“å¦ä¸€ä¾§çš„å®ä½“ï¼ˆé€šå¸¸æ˜¯ä¸€ä¸ªæ–‡ä»¶æˆ–å¥—æ¥å­—ï¼‰ä¹‹é—´æœ‰æ•ˆåœ°ä¼ è¾“æ•°æ®ã€‚
 
 Buffer: This works with a channel to process data
-Java NIOÖĞµÄBufferÓÃÓÚºÍNIOÍ¨µÀ½øĞĞ½»»¥¡£
-Ğ´£ºBuffer -> Channel
-¶Á£ºChannel -> Buffer
+Java NIOä¸­çš„Bufferç”¨äºå’ŒNIOé€šé“è¿›è¡Œäº¤äº’ã€‚ å†™ï¼šBuffer -> Channel è¯»ï¼šChannel -> Buffer
 
 Selector: This is a technology that allows a single thread to handle multiple channels
-Selector£¨Ñ¡ÔñÆ÷£©ÊÇJava NIOÖĞÄÜ¹»¼ì²âÒ»µ½¶à¸öNIOÍ¨µÀ£¬²¢ÄÜ¹»ÖªÏşÍ¨µÀÊÇ·ñÎªÖîÈç¶ÁĞ´ÊÂ¼ş×öºÃ×¼±¸µÄ×é¼ş¡£ÕâÑù£¬Ò»¸öµ¥¶ÀµÄÏß³Ì¿ÉÒÔ¹ÜÀí¶à¸öchannel£¬´Ó¶ø¹ÜÀí¶à¸öÍøÂçÁ¬½Ó¡£
+Selectorï¼ˆé€‰æ‹©å™¨ï¼‰æ˜¯Java NIOä¸­èƒ½å¤Ÿæ£€æµ‹ä¸€åˆ°å¤šä¸ªNIOé€šé“ï¼Œå¹¶èƒ½å¤ŸçŸ¥æ™“é€šé“æ˜¯å¦ä¸ºè¯¸å¦‚è¯»å†™äº‹ä»¶åšå¥½å‡†å¤‡çš„ç»„ä»¶ã€‚è¿™æ ·ï¼Œä¸€ä¸ªå•ç‹¬çš„çº¿ç¨‹å¯ä»¥ç®¡ç†å¤šä¸ªchannelï¼Œä»è€Œç®¡ç†å¤šä¸ªç½‘ç»œè¿æ¥ã€‚
+
+A channel and a buffer are typically associated with each other. Data may be transferred from a channel to a buffer or from a buffer to a channel.
+The buffer, as its name implies, is a temporary repository for information. The selector is useful in supporting application scalability,
 
 
-A channel and a buffer are typically associated with each other. Data may be transferred
-from a channel to a buffer or from a buffer to a channel. The buffer, as its name implies, is
-a temporary repository for information. The selector is useful in supporting application
-scalability,
+ä½¿ç”¨Bufferè¯»å†™æ•°æ®çš„æ­¥éª¤ï¼š 1. Write data into the Buffer 2. Call buffer.flip() 3. Read data out of the Buffer 4. Call buffer.clear() or buffer.compact()
 
-ÕâĞ©ÊÇJava NIOÖĞ×îÖØÒªµÄÍ¨µÀµÄÊµÏÖ£º
+clear()æ–¹æ³•ä¼šæ¸…ç©ºæ•´ä¸ªç¼“å†²åŒºã€‚ compact()æ–¹æ³•åªä¼šæ¸…é™¤å·²ç»è¯»è¿‡çš„æ•°æ®ã€‚ä»»ä½•æœªè¯»çš„æ•°æ®éƒ½è¢«ç§»åˆ°ç¼“å†²åŒºçš„èµ·å§‹å¤„ï¼Œæ–°å†™å…¥çš„æ•°æ®å°†æ”¾åˆ°ç¼“å†²åŒºæœªè¯»æ•°æ®çš„åé¢ã€‚
+
+
+Channelç”¨äºåœ¨å­—èŠ‚ç¼“å†²åŒºå’Œä½äºé€šé“å¦ä¸€ä¾§çš„å®ä½“ï¼ˆé€šå¸¸æ˜¯ä¸€ä¸ªæ–‡ä»¶æˆ–å¥—æ¥å­—ï¼‰ä¹‹é—´æœ‰æ•ˆåœ°ä¼ è¾“æ•°æ®ã€‚
+
+Java NIOçš„é€šé“ç±»ä¼¼æµï¼Œä½†åˆæœ‰äº›ä¸åŒï¼š
+
+    æ—¢å¯ä»¥ä»é€šé“ä¸­è¯»å–æ•°æ®ï¼Œåˆå¯ä»¥å†™æ•°æ®åˆ°é€šé“ã€‚ä½†æµçš„è¯»å†™é€šå¸¸æ˜¯å•å‘çš„ã€‚
+    é€šé“å¯ä»¥å¼‚æ­¥åœ°è¯»å†™ã€‚
+    é€šé“ä¸­çš„æ•°æ®æ€»æ˜¯è¦å…ˆè¯»åˆ°ä¸€ä¸ªBufferï¼Œæˆ–è€…æ€»æ˜¯è¦ä»ä¸€ä¸ªBufferä¸­å†™å…¥ã€‚
+
+Channelçš„å®ç°
+
+è¿™äº›æ˜¯Java NIOä¸­æœ€é‡è¦çš„é€šé“çš„å®ç°ï¼š
 
     FileChannel
     DatagramChannel
     SocketChannel
     ServerSocketChannel
-    
-Ê¹ÓÃBuffer¶ÁĞ´Êı¾İµÄ²½Öè£º
-1. Write data into the Buffer
-2. Call buffer.flip()
-3. Read data out of the Buffer
-4. Call buffer.clear() or buffer.compact()
 
-clear()·½·¨»áÇå¿ÕÕû¸ö»º³åÇø¡£
-compact()·½·¨Ö»»áÇå³ıÒÑ¾­¶Á¹ıµÄÊı¾İ¡£ÈÎºÎÎ´¶ÁµÄÊı¾İ¶¼±»ÒÆµ½»º³åÇøµÄÆğÊ¼´¦£¬ĞÂĞ´ÈëµÄÊı¾İ½«·Åµ½»º³åÇøÎ´¶ÁÊı¾İµÄºóÃæ¡£
+FileChannel ä»æ–‡ä»¶ä¸­è¯»å†™æ•°æ®ã€‚
+
+DatagramChannel èƒ½é€šè¿‡UDPè¯»å†™ç½‘ç»œä¸­çš„æ•°æ®ã€‚
+
+SocketChannel èƒ½é€šè¿‡TCPè¯»å†™ç½‘ç»œä¸­çš„æ•°æ®ã€‚
+
+ServerSocketChannelå¯ä»¥ç›‘å¬æ–°è¿›æ¥çš„TCPè¿æ¥ï¼ŒåƒWebæœåŠ¡å™¨é‚£æ ·ã€‚å¯¹æ¯ä¸€ä¸ªæ–°è¿›æ¥çš„è¿æ¥éƒ½ä¼šåˆ›å»ºä¸€ä¸ªSocketChannelã€‚
+
+NetworkChannel This	supports	a	network	socket
+
+AsynchronousSocketChannel This	supports	asynchronous	streaming	sockets
